@@ -2,3 +2,4 @@
 bin/
 vendor/
 result
+node_modules
