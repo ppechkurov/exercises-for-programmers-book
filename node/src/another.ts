@@ -1,1 +1,1 @@
-export const exported = "exported"
+export const exported = "Exported error message";

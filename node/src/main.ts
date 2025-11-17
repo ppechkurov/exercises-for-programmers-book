@@ -1,6 +1,15 @@
-import { Console, Effect } from "effect";
-import { exported } from "./another.ts";
+import { Effect, Console, Schedule, pipe } from "effect";
+import { NodeRuntime } from "@effect/platform-node";
 
-const program = Console.log(exported);
+const program = pipe(
+	Effect.addFinalizer(() => Console.log("Exiting...")),
+	Effect.andThen(Console.log("Application started!")),
+	Effect.andThen(
+		Effect.repeat(Console.log("still alive..."), {
+			schedule: Schedule.spaced("1 second"),
+		}),
+	),
+	Effect.scoped,
+);
 
-Effect.runSync(program);
+NodeRuntime.runMain(program);
