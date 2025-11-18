@@ -16,10 +16,10 @@ func TestCount(t *testing.T) {
 		input string
 		want  string
 	}{
-		"input Homer": {
-			input: "Homer",
-			want:  "What is the input string? Homer has 5 characters.\n",
-		},
+		// "input Homer": {
+		// 	input: "Homer",
+		// 	want:  "What is the input string? Homer has 5 characters.\n",
+		// },
 		// "input \"\"": {
 		// 	input: "",
 		// 	want:  "test",

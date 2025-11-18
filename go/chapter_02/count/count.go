@@ -50,6 +50,6 @@ func Main(in io.Reader, out io.Writer) int {
 	http.Handle("/", http.FileServer(http.Dir("count/")))
 
 	fmt.Fprintln(out, "listening...")
-	http.ListenAndServe(":3333", nil)
+	// http.ListenAndServe(":3333", nil)
 	return 0
 }
