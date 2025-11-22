@@ -1,0 +1,13 @@
+<script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
+
+<form hx-post="/count" hx-target="#count-results">
+  <label for="first">first</label>
+  <input type="text" id="first" name="first">
+
+  <label for="second">second:</label>
+  <input type="text" id="second" name="second">
+
+  <input type="submit" value="Submit">
+</form>
+
+<div id="count-results"></div>
