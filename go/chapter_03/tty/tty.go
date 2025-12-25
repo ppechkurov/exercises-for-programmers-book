@@ -18,7 +18,7 @@ func IsTTY(r io.Reader) bool {
 
 func ReadOnce(r io.Reader) (res string, err error) {
 	_, err = fmt.Fscan(r, &res)
-	if err != nil && err != io.EOF {
+	if err != nil {
 		return "", err
 	}
 	if res == "" {
