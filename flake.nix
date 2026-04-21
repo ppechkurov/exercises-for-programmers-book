@@ -27,6 +27,7 @@
               watchexec
               gnumake
               gotestdox
+              uv
             ];
           };
         };
