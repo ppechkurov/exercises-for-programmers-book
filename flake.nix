@@ -22,6 +22,7 @@
               golangci-lint-langserver
               gopls
               gotools
+              gofumpt
               nodejs_24
               direnv
               watchexec
