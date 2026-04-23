@@ -5,70 +5,101 @@ import (
 	"exercices/internal/input" //nolint:misspell
 	"fmt"
 	"io"
+	"os"
 )
 
 var ErrReadOrder = errors.New("unable to read order")
 
-func Main(in io.Reader, out io.Writer) error {
+type TaxCalc struct {
+	in         io.Reader
+	out        io.Writer
+	amount     float64
+	state      string
+	taxPercent float64
+	total      float64
+}
+
+type option func(*TaxCalc)
+
+func WithIn(in io.Reader) option {
+	return func(tc *TaxCalc) {
+		tc.in = in
+	}
+}
+
+func WithOut(out io.Writer) option {
+	return func(tc *TaxCalc) {
+		tc.out = out
+	}
+}
+
+func NewTaxCalc(opts ...option) *TaxCalc {
+	c := &TaxCalc{
+		in:  os.Stdin,
+		out: os.Stdout,
+	}
+
+	for _, opt := range opts {
+		opt(c)
+	}
+	return c
+}
+
+func (tc *TaxCalc) ReadInputs() (err error) {
 	w := io.Discard
-	isTTY := input.IsTTY(in)
+	isTTY := input.IsTTY(tc.in)
 	if isTTY {
-		w = out
+		w = tc.out
 	}
 
-	amount, state, err := GetInputs(in, w)
+	fmt.Fprintf(w, "What is the order amount? ")
+	tc.amount, err = input.GetFloat(tc.in)
 	if err != nil {
-		return err
+		return fmt.Errorf("invalid order amount: %w", err)
 	}
 
-	tax := CalculateTax(state)
-	total := CalculateTotal(amount, tax)
-
-	result := ""
-	if state == "WI" {
-		result += fmt.Sprintf("The subtotal is $%.2f\n", amount)
-		result += fmt.Sprintf("The tax is $%.2f\n", tax)
+	fmt.Fprintf(w, "What is the state? ")
+	_, err = fmt.Fscan(tc.in, &tc.state)
+	if err != nil {
+		return fmt.Errorf("invalid state: %w", err)
 	}
-	result += fmt.Sprintf("The total is $%.2f\n", total)
-	fmt.Fprint(out, result)
 
 	return nil
 }
 
-const (
-	WITax = 5.5
-	MNTax = 0.0
-)
+const WITax = 5.5
 
-func GetInputs(r io.Reader, w io.Writer) (
-	order float64,
-	state string,
-	err error,
-) {
-	fmt.Fprintf(w, "What is the order amount? ")
-	order, err = input.GetFloat(r)
-	if err != nil {
-		return 0, "", fmt.Errorf("invalid order amount: %w", err)
+func (tc *TaxCalc) CalculateTotal() *TaxCalc {
+	if tc.state == "WI" {
+		tc.taxPercent = WITax
 	}
 
-	state = ""
-	fmt.Fprintf(w, "What is the state? ")
-	_, err = fmt.Fscan(r, &state)
-	if err != nil {
-		return 0, "", err
-	}
-
-	return order, state, err
+	tax := (tc.amount / 100) * tc.taxPercent
+	tc.total = tc.amount + tax
+	return tc
 }
 
-func CalculateTax(state string) float64 {
-	if state == "WI" {
-		return 5.5
+func (tc *TaxCalc) PrintResult() *TaxCalc {
+	result := ""
+	if tc.state == "WI" {
+		result += fmt.Sprintf("The subtotal is $%.2f\n", tc.amount)
+		result += fmt.Sprintf("The tax is $%.2f\n", tc.taxPercent)
 	}
-	return 0.0
+	result += fmt.Sprintf("The total is $%.2f\n", tc.total)
+	fmt.Fprint(tc.out, result)
+	return tc
 }
 
-func CalculateTotal(amount float64, taxPercent float64) float64 {
-	tax := (amount / 100) * taxPercent
-	return amount + tax
+func (tc *TaxCalc) Run() error {
+	err := tc.ReadInputs()
+	if err != nil {
+		return err
+	}
+
+	tc.CalculateTotal().PrintResult()
+	return nil
+}
+
+func Main() error {
+	return NewTaxCalc().Run()
 }

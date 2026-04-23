@@ -22,6 +22,7 @@
               golangci-lint-langserver
               gopls
               gotools
+              gotestsum
               gofumpt
               nodejs_24
               direnv
