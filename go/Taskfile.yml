@@ -1,0 +1,34 @@
+version: '3'
+
+dir: go
+
+tasks:
+  default:
+    desc: List all available tasks
+    cmds:
+      - task --list
+
+  test:
+    desc: Run all tests with gotestsum
+    cmds:
+      - gotestsum --format=testname -- ./...
+
+  test-taxcalc:
+    desc: Run taxcalc tests
+    cmds:
+      - gotestsum --format=testname -- -run "TaxCalc" ./internal/chapter4/taxcalc/...
+
+  watch:
+    desc: Watch and run tests on changes
+    cmds:
+      - gotestsum --format=testname --watch -- ./...
+
+  lint:
+    desc: Run linters
+    cmds:
+      - golangci-lint run ./...
+
+  tidy:
+    desc: Tidy go modules
+    cmds:
+      - go mod tidy

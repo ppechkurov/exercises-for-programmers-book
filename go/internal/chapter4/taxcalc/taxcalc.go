@@ -2,7 +2,7 @@ package taxcalc
 
 import (
 	"errors"
-	"exercices/internal/input" //nolint:misspell
+	"exercices/internal/input"
 	"fmt"
 	"io"
 	"os"
@@ -11,12 +11,12 @@ import (
 var ErrReadOrder = errors.New("unable to read order")
 
 type TaxCalc struct {
-	in         io.Reader
-	out        io.Writer
-	amount     float64
-	state      string
-	taxPercent float64
-	total      float64
+	in     io.Reader
+	out    io.Writer
+	amount float64
+	state  string
+	tax    float64
+	total  float64
 }
 
 type option func(*TaxCalc)
@@ -70,12 +70,13 @@ func (tc *TaxCalc) ReadInputs() (err error) {
 const WITax = 5.5
 
 func (tc *TaxCalc) CalculateTotal() *TaxCalc {
+	taxPercent := 0.0
 	if tc.state == "WI" {
-		tc.taxPercent = WITax
+		taxPercent = WITax
 	}
 
-	tax := (tc.amount / 100) * tc.taxPercent
-	tc.total = tc.amount + tax
+	tc.tax = (tc.amount / 100) * taxPercent
+	tc.total = tc.amount + tc.tax
 	return tc
 }
 
@@ -83,7 +84,7 @@ func (tc *TaxCalc) PrintResult() *TaxCalc {
 	result := ""
 	if tc.state == "WI" {
 		result += fmt.Sprintf("The subtotal is $%.2f\n", tc.amount)
-		result += fmt.Sprintf("The tax is $%.2f\n", tc.taxPercent)
+		result += fmt.Sprintf("The tax is $%.2f\n", tc.tax)
 	}
 	result += fmt.Sprintf("The total is $%.2f\n", tc.total)
 	fmt.Fprint(tc.out, result)

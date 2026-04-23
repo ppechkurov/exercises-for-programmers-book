@@ -17,19 +17,19 @@
           default = mkShell {
             # The Nix packages provided in the environment
             packages = [
+              gnumake
+              go-task
               go_1_25
+              gofumpt
               golangci-lint
               golangci-lint-langserver
               gopls
-              gotools
-              gotestsum
-              gofumpt
-              nodejs_24
-              direnv
-              watchexec
-              gnumake
               gotestdox
-              uv
+              gotestsum
+              gotools
+              nodejs_24
+              uv # for neovim lsp
+              watchexec
             ];
           };
         };

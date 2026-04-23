@@ -180,6 +180,11 @@ linters:
         linters:
           - revive
 
+        # Ignore misspelling of "exercices" (book title uses this intentional spelling)
+      - text: "`exercices` is a misspelling of `exercise`"
+        linters:
+          - misspell
+
         # EXC0007
       - text: "Subprocess launch(ed with variable|ing should be audited)"
         linters:

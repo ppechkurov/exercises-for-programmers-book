@@ -20,7 +20,7 @@ func TestTaxCalcRun_WithValidInputs(t *testing.T) {
 	}]{
 		"amount=10 state=WI": {
 			in:       []byte("10\nWI"),
-			expected: "The subtotal is $10.00\nThe tax is $5.50\nThe total is $10.55\n",
+			expected: "The subtotal is $10.00\nThe tax is $0.55\nThe total is $10.55\n",
 		},
 		"amount=10 state=MN": {
 			in:       []byte("10\nMN"),
@@ -28,7 +28,7 @@ func TestTaxCalcRun_WithValidInputs(t *testing.T) {
 		},
 		"11.067 rounded to 11.07": {
 			in:       []byte("10.49\nWI"),
-			expected: "The subtotal is $10.49\nThe tax is $5.50\nThe total is $11.07\n",
+			expected: "The subtotal is $10.49\nThe tax is $0.58\nThe total is $11.07\n",
 		},
 	}
 
