@@ -1,0 +1,12 @@
+ttyin -stdin input.txt
+
+! exec passval
+
+cmp stdout output.txt
+
+-- input.txt --
+LEROY
+12345
+
+-- output.txt --
+What is your username? What is the password? I don't know you.

@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 dir: go
 
@@ -9,9 +9,9 @@ tasks:
       - task --list
 
   test:
-    desc: Run all tests with gotestsum
+    desc: Run tests with gotestsum
     cmds:
-      - gotestsum --format=testname -- ./...
+      - gotestsum -- {{.CLI_ARGS}}
 
   test-taxcalc:
     desc: Run taxcalc tests
