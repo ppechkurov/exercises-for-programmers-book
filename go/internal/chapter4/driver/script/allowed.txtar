@@ -1,0 +1,11 @@
+ttyin -stdin input.txt
+
+exec driver
+
+cmp stdout output.txt
+
+-- input.txt --
+16
+
+-- output.txt --
+What is your age? You are old enough to legally drive
