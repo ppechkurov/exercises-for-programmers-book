@@ -1,6 +1,6 @@
 ttyin -stdin input.txt
 
-exec driver
+! exec driver
 
 cmp stdout output.txt
 

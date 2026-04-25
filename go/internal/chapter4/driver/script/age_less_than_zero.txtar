@@ -1,0 +1,6 @@
+ttyin -stdin input.txt
+
+! exec driver
+
+-- input.txt --
+-1

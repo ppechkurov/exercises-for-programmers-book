@@ -5,7 +5,7 @@ exec driver
 cmp stdout output.txt
 
 -- input.txt --
-16
+18
 
 -- output.txt --
-What is your age? You are old enough to legally drive
+What is your age? You are old enough to legally drive in the following countries: JP, DE
