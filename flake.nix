@@ -30,6 +30,7 @@
               nodejs_24
               uv # for neovim lsp
               watchexec
+              ollama
             ];
           };
         };

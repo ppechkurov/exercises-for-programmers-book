@@ -1,0 +1,15 @@
+stdin input.txt
+exec blood
+
+cmp stdout output.txt
+
+-- input.txt --
+45
+male
+2
+2
+2
+
+-- output.txt --
+Your BAC is 0.03
+You can drive legally.

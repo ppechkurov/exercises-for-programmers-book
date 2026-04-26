@@ -1,0 +1,2 @@
+! exec blood
+stdout 'no inputs provided'
