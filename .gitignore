@@ -4,3 +4,4 @@ vendor/
 result
 node_modules
 main
+target/

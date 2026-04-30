@@ -31,6 +31,11 @@
               uv # for neovim lsp
               watchexec
               ollama
+              # rust
+              cargo
+              rustc
+              rust-analyzer
+              rustfmt
             ];
           };
         };
