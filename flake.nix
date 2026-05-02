@@ -33,9 +33,11 @@
               ollama
               # rust
               cargo
-              rustc
+              clippy
               rust-analyzer
+              rustc
               rustfmt
+              rustlings
             ];
           };
         };
