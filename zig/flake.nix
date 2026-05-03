@@ -16,7 +16,7 @@
         devShells = {
           default = mkShell {
             # The Nix packages provided in the environment
-            packages = [ zig zls ];
+            packages = [ zig zls watchexec ];
           };
         };
       });
