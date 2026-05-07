@@ -1,10 +1,4 @@
-mod garden;
-
 fn main() {
-    let plant = garden::vegetables::Asparagus {
-        name: String::from("Asparagus"),
-        stalks: 5,
-    };
-
-    println!("I'm growing {:?}!", plant);
+    let s1 = String::from("hi");
+    let h = s1[0];
 }
