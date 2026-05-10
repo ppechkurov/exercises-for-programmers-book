@@ -1,0 +1,2 @@
+chain_width = 40       # break chains shorter
+chain_indent = "Block" # keep dots at same indent level
