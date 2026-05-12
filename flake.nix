@@ -38,6 +38,7 @@
               rustc
               rustfmt
               rustlings
+              cargo-nextest
             ];
           };
         };
