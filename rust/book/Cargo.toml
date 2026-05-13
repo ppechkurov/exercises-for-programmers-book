@@ -1,0 +1,6 @@
+[workspace]
+resolver = "3"
+members = ["chapter_00", "chapter_01", "tests"]
+
+[workspace.dependencies]
+assert_cmd = "2.2.2"
