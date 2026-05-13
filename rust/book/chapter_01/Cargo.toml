@@ -1,0 +1,10 @@
+[package]
+name = "chapter_01"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+io = { path = "../io" }
+
+[dev-dependencies]
+assert_cmd.workspace = true
