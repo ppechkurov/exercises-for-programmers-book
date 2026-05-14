@@ -1,5 +1,5 @@
 .direnv
-bin/
+/bin/
 vendor/
 result
 node_modules
